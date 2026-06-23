@@ -5,13 +5,14 @@ interface PageHeaderProps {
   // A página passa a ação do botão por props.
   // Assim, este componente só cuida da parte visual do cabeçalho.
   onCreateEquipment: () => void
+  title: string
 }
 
-export function PageHeader({ onCreateEquipment }: PageHeaderProps) {
+export function PageHeader({ onCreateEquipment,title }: PageHeaderProps) {
   return (
     <Container>
       <div>
-        <Title>Equipamentos</Title>
+        <Title>{title}</Title>
         <Description>Gerencie os equipamentos cadastrados no laboratório.</Description>
       </div>
 
