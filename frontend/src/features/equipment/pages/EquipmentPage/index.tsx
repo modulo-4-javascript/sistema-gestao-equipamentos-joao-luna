@@ -9,6 +9,7 @@ import { EquipmentStatusModal } from '../../components/EquipmentStatusModal'
 import { EquipmentTable } from '../../components/EquipmentTable'
 import { PageHeader } from '../../components/PageHeader'
 import { SummaryCards } from '../../components/SummaryCards'
+import { useNavigate } from 'react-router-dom'
 import {
   equipmentMock,
   equipmentSummaryMock,
@@ -18,7 +19,12 @@ import {
 import type { Equipment, EquipmentStatus, EquipmentType } from '../../types/equipment'
 import { Container } from './styles'
 
+
 export function EquipmentPage() {
+  function handleViewEquipment(equipment: Equipment) {
+  navigate(`/equipment/${equipment.id}`)
+}
+  const navigate = useNavigate()
   const [messageApi, contextHolder] = message.useMessage()
 
   // Estados dos filtros. Cada campo da área de filtros controla um estado aqui.
@@ -101,6 +107,14 @@ export function EquipmentPage() {
           onStatusChange={setSelectedStatus}
           onTypeChange={setSelectedType}
           onClear={handleClearFilters}
+        />
+
+        <EquipmentTable
+          equipments={visibleEquipment}
+          onChangeStatusEquipment={setEquipmentInStatus}
+          onEditEquipment={handleEditEquipment}
+          onRemoveEquipment={setEquipmentToRemove}
+          onViewEquipment={handleViewEquipment}
         />
 
         {/* Tabela principal: recebe a lista que, depois, será filtrada. */}
